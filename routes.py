@@ -8,7 +8,7 @@ from controllers import *
 
 url_blueprint = Blueprint("urls", __name__)
 
-
+############################# Aeroporto #############################
 @url_blueprint.route("/aeroporto", methods=["POST"])
 def add_person():
     data = request.get_json()
@@ -42,7 +42,7 @@ def update_aeroporto():
     res = hw_update_aeroporto(data)
     return make_response(jsonify(res))
 
-
+############################# VOO #############################
 @url_blueprint.route("/voo", methods=["POST"])
 def add_voo():
     data = request.get_json()

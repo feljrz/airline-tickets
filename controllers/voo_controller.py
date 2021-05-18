@@ -1,6 +1,8 @@
-from flask.globals import session
+# from flask.globals import session
 from database import SessionLocal
 from models import Voo
+from datetime import datetime
+
 
 
 def populate_aeroporto(aeroportos):
@@ -31,14 +33,15 @@ def populate_voo_aeroporto(voos):
 
 def hw_add_voo(request):
     session = SessionLocal()
-    voo = Voo(destino=request["destino"], companhia=request["companhia"], capacidade=request["capacidade"],
-             ocupacao=request["ocupacao"], preco=request["preco"])
+    voo = Voo(data=datetime.strptime(request["data"], "%d/%m/%Y %H:%M:%S"), 
+            destino=request["destino"], 
+            companhia=request["companhia"], 
+            capacidade=request["capacidade"],
+            ocupacao=request["ocupacao"], 
+            preco=request["preco"])
     voo_json = populate_voo([voo])
-    print('oi')
     session.add(voo)
-    print('oiii')
     session.commit()
-    print("oiiiiiii")
     session.close()
     return voo_json
 
@@ -55,7 +58,6 @@ def hw_get_voo(id):
     voo_json = populate_voo(voo)
     session.close()
     return voo_json
-
 
 
 def hw_list_voos(date, company):

@@ -21,9 +21,9 @@ class Voo(Base):
     id = Column(Integer, primary_key=True)
     destino = Column(String(100), nullable=False)
     companhia = Column(String(100), nullable=False)
-    data = Column(DateTime)
+    data = Column(DateTime )
     capacidade = Column(Integer, nullable=False)
     ocupacao = Column(Integer, nullable=False)
     preco = Column(Float)
-    # id_aeroporto = Column(Integer, ForeignKey("aeroporto.id")) Acho que não é necessário POSSO ESTAR ENGANADO
+    id_aeroporto = Column(Integer, ForeignKey("aeroporto.id")) #Acho que não é necessário POSSO ESTAR ENGANADO
     aeroporto = relationship("Aeroporto", back_populates="voos") # vai ser sempre o de origem 
