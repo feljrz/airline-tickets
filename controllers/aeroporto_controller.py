@@ -6,6 +6,16 @@ def populate_aeroporto(aeroportos):
                         'nome': aeroporto.nome,
                         'cidade': aeroporto.cidade} for aeroporto in aeroportos]
     
+# aeroporto(where origem == x) . voos(destino == y) 
+def hw_destinos(origem):
+    # session = SessionLocal()
+    pass
+
+
+
+
+
+
 
 def hw_add_aeroporto(request):
     session = SessionLocal()
@@ -49,3 +59,4 @@ def hw_update_aeroporto(request):
     session.commit()
     aeroporto_json = hw_get_aeroporto(aeroporto.id)
     return aeroporto_json
+

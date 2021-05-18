@@ -25,5 +25,5 @@ class Voo(Base):
     capacidade = Column(Integer, nullable=False)
     ocupacao = Column(Integer, nullable=False)
     preco = Column(Float)
-    id_aeroporto = Column(Integer, ForeignKey("aeroporto.id"))
-    aeroporto = relationship("Aeroporto", back_populates="voos")
+    # id_aeroporto = Column(Integer, ForeignKey("aeroporto.id")) Acho que não é necessário POSSO ESTAR ENGANADO
+    aeroporto = relationship("Aeroporto", back_populates="voos") # vai ser sempre o de origem 
