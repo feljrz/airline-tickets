@@ -41,3 +41,20 @@ def update_aeroporto():
     data = request.get_json()
     res = hw_update_aeroporto(data)
     return make_response(jsonify(res))
+
+
+@url_blueprint.route("/voo", methods=["POST"])
+def add_voo():
+    data = request.get_json()
+    res = hw_add_voo(data)
+    return make_response(jsonify(res))
+
+@url_blueprint.route("/voo", methods=["GET"])
+def list_voos():
+    res = hw_get_voos()
+    return make_response(jsonify(res))
+
+@url_blueprint.route("/voo/<id>", methods=["GET"])
+def get_voo():
+    res = hw_get_voo(id)
+    return make_response(jsonify(res))
