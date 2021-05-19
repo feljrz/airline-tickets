@@ -14,7 +14,6 @@ def populate_cadastro(cadastros):
     ]
 
 
-
 def hw_load_user(id):
     session = SessionLocal()
     return session.query(Cadastro).filter_by(id = id).first()

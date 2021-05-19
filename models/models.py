@@ -13,9 +13,19 @@ from sqlalchemy import (
 )
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import backref, relationship
+from sqlalchemy.sql.sqltypes import VARCHAR
 from flask_login import UserMixin
 
 from database import Base
+
+class Reserva(Base):
+            __tablename__ = "reserva"
+            id = Column(Integer, primary_key=True)
+            id_voo = Column(Integer, ForeignKey("voo.id"))
+            id_cadastro = Column(Integer, ForeignKey("cadastro.id"))
+            e_ticket = Column(String(45))
+            voo = relationship("Voo", back_populates="reservas")
+            cadastro = relationship("Cadastro", back_populates="reservas")
 
 
 class Aeroporto(Base):
@@ -37,14 +47,17 @@ class Voo(Base):
     preco = Column(Float)
     id_aeroporto = Column(
         Integer, ForeignKey("aeroporto.id")
-    )  # Acho que não é necessário POSSO ESTAR ENGANADO
+    ) 
     aeroporto = relationship(
         "Aeroporto", back_populates="voos"
-    )  # vai ser sempre o de origem
+    )  
+    reservas = relationship("Reserva", back_populates='voo')
 
 class Cadastro(UserMixin, Base):
     __tablename__ = "cadastro"
     id = Column(Integer, primary_key=True)
-    nome = Column(String(45), nullable=False)
+    nome = Column(String(245), nullable=False)
     email = Column(String(45), nullable=False)
-    senha = Column(String(45), nullable=False)
+    senha = Column(String(16), nullable=False)
+    reservas = relationship("Reserva", back_populates="cadastro")
+

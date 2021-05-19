@@ -145,3 +145,13 @@ def login():
 def logout():
     res = hw_logout()
     return make_response(jsonify(res))
+
+
+###########################  Reserva  #####################
+
+@url_blueprint.route("/reserva", methods=['POST'])
+def reserva():
+    data = request.get_json()
+    res = hw_reserva(data)
+    return make_response(jsonify(res))
+
