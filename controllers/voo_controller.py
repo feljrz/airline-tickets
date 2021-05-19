@@ -99,23 +99,15 @@ def hw_update_voo(request):
     return voo_json
 
 
-
+#4
 def hw_get_aeroporto_by_company(company):
     session = SessionLocal()
     voos_company = session.query(Voo).filter_by(companhia=company).all()
-    for voo in voos_company:
-        # print(voo['aeroporto']['cidade'])
-        print(voo)
-    
-
-
-    # voos_company_json = populate_voo_aeroporto(voos_company)
-    # cidades_destino = []
-    # for voos_company_ele in voos_company_json:
-    #     cidades_destino.append(voos_company_ele['aeroporto']['cidade'])
-    #     print(voos_company_ele)
+   
+    voos_company_json = populate_voo_aeroporto(voos_company)
+    cidades_destino = [elem['aeroporto'][0] for elem in voos_company_json]
     session.close()
-    return {"message": "aaa"}
+    return cidades_destino
 
 #5
 def hw_get_aeroportos_destino(origem):
