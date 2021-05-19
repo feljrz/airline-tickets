@@ -58,5 +58,6 @@ def hw_update_aeroporto(request):
     session.add(aeroporto)
     session.commit()
     aeroporto_json = hw_get_aeroporto(aeroporto.id)
+    session.close()
     return aeroporto_json
 
