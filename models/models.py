@@ -13,6 +13,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import backref, relationship
+from flask_login import UserMixin
 
 from database import Base
 
@@ -40,3 +41,10 @@ class Voo(Base):
     aeroporto = relationship(
         "Aeroporto", back_populates="voos"
     )  # vai ser sempre o de origem
+
+class Cadastro(UserMixin, Base):
+    __tablename__ = "cadastro"
+    id = Column(Integer, primary_key=True)
+    nome = Column(String(45), nullable=False)
+    email = Column(String(45), nullable=False)
+    senha = Column(String(45), nullable=False)

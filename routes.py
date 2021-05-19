@@ -3,10 +3,13 @@
 
 from flask import Blueprint, Flask, Response, json, jsonify, request
 from flask.helpers import make_response
+from flask_login import LoginManager, login_required
 
 from controllers import *
 
 url_blueprint = Blueprint("urls", __name__)
+
+login_manager = LoginManager()
 
 ############################# Aeroporto #############################
 @url_blueprint.route("/aeroporto", methods=["POST"])
@@ -110,4 +113,35 @@ def get_voos():
 @url_blueprint.route("/voo/passageiros/<num>", methods=["GET"])
 def get_voos_passageiros(num):
     res = hw_get_voos_passageiros(num)
+    return make_response(jsonify(res))
+
+
+
+###########################  Login  #####################
+
+@login_manager.user_loader
+def load_user(user_id):
+    return hw_load_user(user_id)
+
+@url_blueprint.route("/cadastro", methods=["GET"])
+def get_cadastro():
+    res = hw_get_cadastros()
+    return make_response(jsonify(res))
+
+@url_blueprint.route("/cadastro", methods=["POST"])
+def add_cadastro():
+    data = request.get_json()
+    res = hw_add_cadastro(data)
+    return make_response(jsonify(res))
+
+@url_blueprint.route("/login", methods=["POST"])
+def login():
+    data = request.get_json()
+    res = hw_login(data)
+    return make_response(jsonify(res))
+
+@url_blueprint.route("/logout", methods=['GET'])
+@login_required
+def logout():
+    res = hw_logout()
     return make_response(jsonify(res))
