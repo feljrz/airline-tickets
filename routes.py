@@ -70,26 +70,19 @@ def update_voo():
     return make_response(jsonify(res))
 
 #4
-@url_blueprint.route("/voo/<companhia>", methods=["GET"])
+@url_blueprint.route("/voo/companhia/<companhia>", methods=["GET"])
 def get_aeroporto_by_company(companhia):
     print(companhia)
     print("BANANANANANA")
     res = hw_get_aeroporto_by_company(companhia)
     return make_response(jsonify(res))
     
-#7
-@url_blueprint.route("/pesquisavoos/<num>", methods=["GET"])
-def pesquisa_voos(num):
-    res = hw_get_voos_passageiros(num)
-    return make_response(jsonify(res))
-
 #5
 @url_blueprint.route("/aeroporto/destinos", methods=["POST"])
 def get_aeroportos_destino():
     data = request.get_json()
     res = hw_get_aeroportos_destino(data['origem'])
     return make_response(jsonify(res))
-
 
 #6
 @url_blueprint.route("/voo/companhia", methods=["POST"])
@@ -98,4 +91,9 @@ def get_voos():
     # date = day + "/" + month + '/' + year
     # print(date, company)
     res = hw_get_voos_companhia(data)
+    return make_response(jsonify(res))
+#7
+@url_blueprint.route("/voo/passageiros/<num>", methods=["GET"])
+def get_voos_passageiros(num):
+    res = hw_get_voos_passageiros(num)
     return make_response(jsonify(res))

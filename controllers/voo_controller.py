@@ -1,5 +1,6 @@
 # from flask.globals import session
 # from models.models import Aeroporto
+from sqlalchemy.sql import text
 from database import SessionLocal
 from models import Voo, Aeroporto
 from datetime import datetime, timedelta
@@ -102,15 +103,19 @@ def hw_update_voo(request):
 def hw_get_aeroporto_by_company(company):
     session = SessionLocal()
     voos_company = session.query(Voo).filter_by(companhia=company).all()
-    print(voos_company['aeroporto']['cidade'])
-    voos_company_json = populate_voo_aeroporto(voos_company)
-    cidades_destino = []
-    for voos_company_ele in voos_company_json:
-        cidades_destino.append(voos_company_ele['aeroporto']['cidade'])
-        print(voos_company_ele)
+    for voo in voos_company:
+        # print(voo['aeroporto']['cidade'])
+        print(voo)
     
+
+
+    # voos_company_json = populate_voo_aeroporto(voos_company)
+    # cidades_destino = []
+    # for voos_company_ele in voos_company_json:
+    #     cidades_destino.append(voos_company_ele['aeroporto']['cidade'])
+    #     print(voos_company_ele)
     session.close()
-    return {"message": "aaaaaaaaa"}
+    return {"message": "aaa"}
 
 #5
 def hw_get_aeroportos_destino(origem):
@@ -130,10 +135,11 @@ def hw_get_voos_companhia(request):
     session.close()
     return voos_json
 
-
+#7
 def hw_get_voos_passageiros(n):
     session = SessionLocal()
-    voos = session.query(Voo).filter((Voo.capacidade-Voo.ocupacao)>n).order_by(Voo.preco.asc()).all()
-    voos_json = populate_voo(voos)
+    voos_disponibilidade = session.query(Voo, (Voo.capacidade - Voo.ocupacao).label("disponibilidade")).filter(text(f"disponibilidade > {n}")).order_by(Voo.preco.asc()).all()
+    voo_list = [voo[0] for voo in voos_disponibilidade]
+    voos_json = populate_voo_aeroporto(voo_list)
     session.close()
     return voos_json
