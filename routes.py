@@ -83,10 +83,10 @@ def pesquisa_voos(num):
     res = hw_search_voos(num)
     return make_response(jsonify(res))
 
-@url_blueprint.route("/aeroportokk", methods=["POST"])
+#5
+@url_blueprint.route("/aeroporto/destinos", methods=["POST"])
 def get_aeroportos_destino():
     data = request.get_json()
-
     res = hw_get_aeroportos_destino(data['origem'])
     return make_response(jsonify(res))
 

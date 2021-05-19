@@ -113,14 +113,13 @@ def hw_get_aeroporto_by_company(company):
     session.close()
     return {"message": "aaaaaaaaa"}
 
-
+#5
 def hw_get_aeroportos_destino(origem):
     session = SessionLocal()
-    # voo_origem = session.query(Voo).filter(Voo.aeroporto.origem == origem).all()
     voo_origem = session.query(Voo).join(Aeroporto).filter(Aeroporto.cidade == origem).all()
     voo_origem_json = populate_voo_aeroporto(voo_origem)
-    print(voo_origem_json)
-    return {"message": "banana"}
+    destinos = [{"destino": elem["destino"]} for elem in voo_origem_json]
+    return destinos
 
 
 def hw_list_voos(date, company):
