@@ -80,7 +80,7 @@ def get_aeroporto_by_company(companhia):
 #7
 @url_blueprint.route("/pesquisavoos/<num>", methods=["GET"])
 def pesquisa_voos(num):
-    res = hw_search_voos(num)
+    res = hw_get_voos_passageiros(num)
     return make_response(jsonify(res))
 
 #5
@@ -92,9 +92,10 @@ def get_aeroportos_destino():
 
 
 #6
-@url_blueprint.route("/retornavoos", methods=["POST"])
+@url_blueprint.route("/voo/companhia", methods=["POST"])
 def get_voos():
-    date = day + "/" + month + '/' + year
-    print(date, company)
-    res = hw_list_voos(date, company)
+    data = request.get_json()
+    # date = day + "/" + month + '/' + year
+    # print(date, company)
+    res = hw_get_voos_companhia(data)
     return make_response(jsonify(res))

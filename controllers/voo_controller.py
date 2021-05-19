@@ -2,7 +2,7 @@
 # from models.models import Aeroporto
 from database import SessionLocal
 from models import Voo, Aeroporto
-from datetime import datetime
+from datetime import datetime, timedelta
 
 
 
@@ -23,7 +23,7 @@ def populate_voo(voos):
 
 def populate_voo_aeroporto(voos):
     return [{'id' : voo.id,
-                  'data' : voo.data,
+                  'data' : datetime.strftime(voo.data, "%d/%m/%Y %H:%M:%S"),
                   'destino' : voo.destino,
                   'companhia': voo.companhia,
                   'capacidade':voo.capacidade,
@@ -35,7 +35,6 @@ def populate_voo_aeroporto(voos):
 
 
 def hw_add_voo(request):
-    print("-----------------------------hw_add_voo---------------------------")
     session = SessionLocal()
     voo = Voo(data=datetime.strptime(request["data"], "%d/%m/%Y %H:%M:%S"), 
             destino=request["destino"], 
@@ -121,16 +120,18 @@ def hw_get_aeroportos_destino(origem):
     destinos = [{"destino": elem["destino"]} for elem in voo_origem_json]
     return destinos
 
-
-def hw_list_voos(date, company):
+#6
+def hw_get_voos_companhia(request):
     session = SessionLocal()
-    voos = session.query(Voo).filter_by(datetime.strftime(Voo.data, "%d/%m/%Y %H:%M:%S").date()==date, companhia=company).all()
-    voos_json = populate_voo(voos)
+    date = datetime.strptime(request['data']+" 00:00:00", "%d/%m/%Y %H:%M:%S")
+    time_after = date + timedelta(hours= 23, minutes= 59, seconds= 59)
+    voos = session.query(Voo).filter(Voo.data >= date, Voo.data <= time_after).filter_by(companhia=request["companhia"]).all()
+    voos_json = populate_voo_aeroporto(voos)
     session.close()
     return voos_json
 
 
-def hw_search_voos(n):
+def hw_get_voos_passageiros(n):
     session = SessionLocal()
     voos = session.query(Voo).filter((Voo.capacidade-Voo.ocupacao)>n).order_by(Voo.preco.asc()).all()
     voos_json = populate_voo(voos)
