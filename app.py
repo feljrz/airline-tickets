@@ -12,4 +12,4 @@ init_db()
 login_manager.init_app(app)
 
 if __name__ == "__main__":
-    app.run(host='172.17.0.2', debug=True, port=5000)
+    app.run(host='172.18.0.2', debug=True, port=5000)

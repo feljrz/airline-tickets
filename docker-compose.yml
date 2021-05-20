@@ -1,0 +1,38 @@
+version: "3.3"
+
+networks:
+  airline-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.18.0.0/24
+
+services:
+  airline_app:
+    build: .
+    container_name: airline-ticket-container
+    depends_on:
+      - postgres-server
+    links:
+      - postgres-server
+    ports:
+      - "5000:5000"
+    environment:
+      DATABASE_URL: "postgresql://postgres:12345678@172.18.0.3:5432/passagens_db"
+    networks:
+      airline-network:
+        ipv4_address: 172.18.0.2
+
+  postgres-server:
+    image: postgres
+    container_name: airline-ticket-postgreSQL
+    environment:
+      POSTGRES_PASSWORD: "12345678"
+    ports:
+      - "5432:5432"
+    volumes:
+      - .:/var/lib/postgres/data
+      - ./init_passagens.sql:/docker-entrypoint-initdb.d/init_passagens.sql
+    networks:
+      airline-network:
+        ipv4_address: 172.18.0.3

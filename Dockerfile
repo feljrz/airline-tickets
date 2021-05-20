@@ -4,7 +4,7 @@ EXPOSE 5000
 
 RUN apt -y update \
     && apt install -y \
-    net-tools \
+    libpq-dev \
     apt-utils \
     apt-transport-https \
     build-essential \
