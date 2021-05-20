@@ -1,11 +1,11 @@
 from flask import Flask
 
 from database import init_db
-from routes import url_blueprint, login_manager
+from routes import login_manager, url_blueprint
 
 app = Flask(__name__)
 app.register_blueprint(url_blueprint)
-app.config['SECRET_KEY'] = 'hihihi'
+app.config["SECRET_KEY"] = "hihihi"
 
 init_db()
 

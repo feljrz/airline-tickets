@@ -1,31 +1,23 @@
 from datetime import date, datetime
 
-from sqlalchemy import (
-    Column,
-    Date,
-    DateTime,
-    Float,
-    ForeignKey,
-    Integer,
-    Sequence,
-    String,
-    Table,
-)
+from flask_login import UserMixin
+from sqlalchemy import (Column, Date, DateTime, Float, ForeignKey, Integer,
+                        Sequence, String, Table)
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import backref, relationship
 from sqlalchemy.sql.sqltypes import VARCHAR
-from flask_login import UserMixin
 
 from database import Base
 
+
 class Reserva(Base):
-            __tablename__ = "reserva"
-            id = Column(Integer, primary_key=True)
-            id_voo = Column(Integer, ForeignKey("voo.id"))
-            id_cadastro = Column(Integer, ForeignKey("cadastro.id"))
-            e_ticket = Column(String(45))
-            voo = relationship("Voo", back_populates="reservas")
-            cadastro = relationship("Cadastro", back_populates="reservas")
+    __tablename__ = "reserva"
+    id = Column(Integer, primary_key=True)
+    id_voo = Column(Integer, ForeignKey("voo.id"))
+    id_cadastro = Column(Integer, ForeignKey("cadastro.id"))
+    e_ticket = Column(String(45))
+    voo = relationship("Voo", back_populates="reservas")
+    cadastro = relationship("Cadastro", back_populates="reservas")
 
 
 class Aeroporto(Base):
@@ -45,13 +37,10 @@ class Voo(Base):
     capacidade = Column(Integer, nullable=False)
     ocupacao = Column(Integer, nullable=False)
     preco = Column(Float)
-    id_aeroporto = Column(
-        Integer, ForeignKey("aeroporto.id")
-    ) 
-    aeroporto = relationship(
-        "Aeroporto", back_populates="voos"
-    )  
-    reservas = relationship("Reserva", back_populates='voo')
+    id_aeroporto = Column(Integer, ForeignKey("aeroporto.id"))
+    aeroporto = relationship("Aeroporto", back_populates="voos")
+    reservas = relationship("Reserva", back_populates="voo")
+
 
 class Cadastro(UserMixin, Base):
     __tablename__ = "cadastro"
@@ -60,4 +49,3 @@ class Cadastro(UserMixin, Base):
     email = Column(String(45), nullable=False)
     senha = Column(String(16), nullable=False)
     reservas = relationship("Reserva", back_populates="cadastro")
-

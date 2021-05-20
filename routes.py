@@ -116,17 +116,19 @@ def get_voos_passageiros(num):
     return make_response(jsonify(res))
 
 
-
 ###########################  Login  #####################
+
 
 @login_manager.user_loader
 def load_user(user_id):
     return hw_load_user(user_id)
 
+
 @url_blueprint.route("/cadastro", methods=["GET"])
 def get_cadastro():
     res = hw_get_cadastros()
     return make_response(jsonify(res))
+
 
 @url_blueprint.route("/cadastro", methods=["POST"])
 def add_cadastro():
@@ -134,13 +136,15 @@ def add_cadastro():
     res = hw_add_cadastro(data)
     return make_response(jsonify(res))
 
+
 @url_blueprint.route("/login", methods=["POST"])
 def login():
     data = request.get_json()
     res = hw_login(data)
     return make_response(jsonify(res))
 
-@url_blueprint.route("/logout", methods=['GET'])
+
+@url_blueprint.route("/logout", methods=["GET"])
 @login_required
 def logout():
     res = hw_logout()
@@ -149,9 +153,21 @@ def logout():
 
 ###########################  Reserva  #####################
 
-@url_blueprint.route("/reserva", methods=['POST'])
-def reserva():
+
+@url_blueprint.route("/reserva", methods=["POST"])
+def add_reserva():
     data = request.get_json()
-    res = hw_reserva(data)
+    res = hw_add_reserva(data)
     return make_response(jsonify(res))
 
+
+@url_blueprint.route("/reserva", methods=["GET"])
+def get_reservas():
+    res = hw_get_reservas()
+    return make_response(jsonify(res))
+
+
+@url_blueprint.route("/reserva/<id>", methods=["GET"])
+def get_reserva(id):
+    res = hw_get_reserva(id)
+    return make_response(jsonify(res))

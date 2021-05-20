@@ -31,9 +31,10 @@ def populate_voo_aeroporto(voos):
 def hw_add_aeroporto(request):
     session = SessionLocal()
     aeroporto = Aeroporto(nome=request["nome"], cidade=request["cidade"])
-    aeroporto_json = populate_aeroporto([aeroporto])
+    # aeroporto_json = populate_aeroporto([aeroporto])
     session.add(aeroporto)
     session.commit()
+    aeroporto_json = hw_get_aeroporto(aeroporto.id)
     session.close()
     return aeroporto_json
 
@@ -48,9 +49,7 @@ def hw_get_aeroportos():
 
 def hw_get_aeroporto(id):
     session = SessionLocal()
-    aeroporto = (
-        session.query(Aeroporto).filter_by(id=id).all()
-    ) 
+    aeroporto = session.query(Aeroporto).filter_by(id=id).all()
     aeroporto_json = populate_aeroporto(aeroporto)
     session.close()
     return aeroporto_json
@@ -58,9 +57,7 @@ def hw_get_aeroporto(id):
 
 def hw_remove_aeroporto(id):
     session = SessionLocal()
-    aeroporto = (
-        session.query(Aeroporto).filter_by(id=id).first()
-    )  
+    aeroporto = session.query(Aeroporto).filter_by(id=id).first()
     session.delete(aeroporto)
     session.commit()
     session.close()

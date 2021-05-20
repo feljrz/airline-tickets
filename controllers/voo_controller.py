@@ -1,9 +1,11 @@
 # from flask.globals import session
 # from models.models import Aeroporto
-from sqlalchemy.sql import text
-from database import SessionLocal
-from models import Voo, Aeroporto
 from datetime import datetime, timedelta
+
+from sqlalchemy.sql import text
+
+from database import SessionLocal
+from models import Aeroporto, Voo
 
 
 def populate_aeroporto(aeroportos):
@@ -57,9 +59,10 @@ def hw_add_voo(request):
         preco=request["preco"],
         id_aeroporto=request["id_aeroporto"],
     )
-    voo_json = populate_voo([voo])
+    # voo_json = populate_voo([voo])
     session.add(voo)
     session.commit()
+    voo_json = hw_get_voo(voo.id)
     session.close()
     return voo_json
 
