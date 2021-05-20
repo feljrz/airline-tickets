@@ -2,7 +2,7 @@ import hashlib
 from datetime import datetime
 
 from database import SessionLocal
-from models import  Reserva
+from models import Reserva
 
 
 def populate_aeroporto(aeroportos):
