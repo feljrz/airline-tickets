@@ -55,6 +55,7 @@ def populate_reserva(reservas):
     ]
 
 
+# 8
 def hw_add_reserva(request):
     session = SessionLocal()
     reserva = Reserva(id_voo=request["id_voo"], id_cadastro=request["id_cadastro"])

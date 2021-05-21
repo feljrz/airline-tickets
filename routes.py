@@ -1,6 +1,3 @@
-# import os
-# print(os.path.abspath(os.path.dirname(os.getcwd()+"/passagens_aereas")))
-
 from flask import Blueprint, Flask, Response, json, jsonify, request
 from flask.helpers import make_response
 from flask_login import LoginManager, login_required
@@ -11,7 +8,7 @@ url_blueprint = Blueprint("urls", __name__)
 
 login_manager = LoginManager()
 
-############################# Aeroporto #############################
+############################ Aeroporto #############################
 @url_blueprint.route("/aeroporto", methods=["POST"])
 def add_person():
     data = request.get_json()
@@ -103,8 +100,6 @@ def get_aeroportos_destino():
 @url_blueprint.route("/voo/data", methods=["POST"])
 def get_voos():
     data = request.get_json()
-    # date = day + "/" + month + '/' + year
-    # print(date, company)
     res = hw_get_voos_companhia(data)
     return make_response(jsonify(res))
 
@@ -155,6 +150,7 @@ def logout():
 
 
 @url_blueprint.route("/reserva", methods=["POST"])
+@login_required
 def add_reserva():
     data = request.get_json()
     res = hw_add_reserva(data)
@@ -162,12 +158,14 @@ def add_reserva():
 
 
 @url_blueprint.route("/reserva", methods=["GET"])
+@login_required
 def get_reservas():
     res = hw_get_reservas()
     return make_response(jsonify(res))
 
 
 @url_blueprint.route("/reserva/<id>", methods=["GET"])
+@login_required
 def get_reserva(id):
     res = hw_get_reserva(id)
     return make_response(jsonify(res))
