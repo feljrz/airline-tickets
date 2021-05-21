@@ -1,4 +1,6 @@
 
+-- CREATE DATABASE passagens;
+
 CREATE SCHEMA IF NOT EXISTS mydb;
 
 -- -----------------------------------------------------
@@ -34,7 +36,7 @@ CREATE TABLE IF NOT EXISTS mydb.cadastro (
   id INT NOT NULL,
   nome VARCHAR(245) NOT NULL,
   email VARCHAR(45) NOT NULL,
-  senha VARCHAR(16) NOT NULL,
+  senha VARCHAR(45) NOT NULL,
   PRIMARY KEY (id));
 
 -- -----------------------------------------------------
