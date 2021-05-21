@@ -47,5 +47,5 @@ class Cadastro(UserMixin, Base):
     id = Column(Integer, primary_key=True)
     nome = Column(String(245), nullable=False)
     email = Column(String(45), nullable=False)
-    senha = Column(String(16), nullable=False)
+    senha = Column(String(45), nullable=False)
     reservas = relationship("Reserva", back_populates="cadastro")
