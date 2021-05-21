@@ -1,0 +1,630 @@
+{
+	"info": {
+		"_postman_id": "5bb6d433-c3b7-46d2-be7e-51c76ecd7b81",
+		"name": "Airline-Tickets",
+		"description": "# Introdução\nA API desenvolvida é um sistema de uma empresa de venda de passagens aéreas.\n\n# Serviços\nOs serviços oferecidos pela API são: Efetuar login e logout, validar uma sessão, busca de aeroportos oferecidos por determinada companhia aérea, busca de aeroportos de destino de acordo com um aeroporto de origem, busca de voos oferecidos por uma companhia aérea em uma determinada data, pesquisa de voôs de acordo com o menor preço para um número de passageiros informados, compra de voô.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Efetuar login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"fulano@email.com\",\n  \"nome\": \"Fulano\",\n  \"senha\": \"banana\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"login"
+					]
+				},
+				"description": "Chamada que recebe um json, com os campos de email e senha e efetua o login caso os dados se encontrem no banco."
+			},
+			"response": []
+		},
+		{
+			"name": "Efetuar logout",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/logout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"logout"
+					]
+				},
+				"description": "Chamada que efetua o logout do usuário atual."
+			},
+			"response": []
+		},
+		{
+			"name": "Realizar cadastro",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"fulano@email.com\",\n    \"nome\": \"Fulano\",\n    \"senha\": \"banana\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/cadastro",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"cadastro"
+					]
+				},
+				"description": "Chamada que recebe um json com nome, email e senha e salva esses dados na tabela de cadastros do banco de dados."
+			},
+			"response": []
+		},
+		{
+			"name": "Recuperar cadastros",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/cadastro",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"cadastro"
+					]
+				},
+				"description": "Chamada que recupera todos os cadastros da tabela de cadastros."
+			},
+			"response": []
+		},
+		{
+			"name": "Recuperar aeroportos",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/aeroporto",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"aeroporto"
+					]
+				},
+				"description": "Chamada que retorna todos os aeroportos cadastrados no banco."
+			},
+			"response": []
+		},
+		{
+			"name": "Adicionar um aeroporto",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nome\":\"Marechal Rondon\",\n\t\"cidade\":\"Cuiabá\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/aeroporto",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"aeroporto"
+					]
+				},
+				"description": "Chamada que recebe o nome e a cidade de um aeroporto e salva ele no sistema."
+			},
+			"response": []
+		},
+		{
+			"name": "Recupera aeroporto por id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/aeroporto/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"aeroporto",
+						"1"
+					]
+				},
+				"description": "Chamada que retorna o aeroporto com id especificado na url."
+			},
+			"response": []
+		},
+		{
+			"name": "Deleta aeroporto por id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/aeroporto/<id>",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"aeroporto",
+						"<id>"
+					]
+				},
+				"description": "Chamada que deleta o aeroporto com o id especificado na url."
+			},
+			"response": []
+		},
+		{
+			"name": "Atualiza cadastro de aeroporto",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"id\": 2, \"nome\": \"Aeroporto de Moscou\", \"cidade\": \"Moscou\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/aeroporto",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"aeroporto"
+					]
+				},
+				"description": "Chamada que atualiza os campos de um aeroporto, recebe um json com o id do aeroporto a ser atualizado, o novo nome e a cidade."
+			},
+			"response": []
+		},
+		{
+			"name": "Recupera voos",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/voos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"voos"
+					]
+				},
+				"description": "Chamada que recupera todos os voos cadastrados no sistema."
+			},
+			"response": []
+		},
+		{
+			"name": "Adiciona um voo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"data\": \"29/05/2021 13:20:00\",\n\"destino\": \"Belo Horizonte\",\n\"companhia\": \"Azul\",\n\"capacidade\": 250,\n\"ocupacao\": 100,\n\"preco\": 500.4,\n\"id_aeroporto\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/voo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"voo"
+					]
+				},
+				"description": "Chamada que recebe um json com os campos de data, destino, companhia, capacidade, ocupação, preço, id do aeroporto de origem e salva um voo com esses dados no sistema."
+			},
+			"response": []
+		},
+		{
+			"name": "Retorna voo por id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/voo/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"voo",
+						"1"
+					]
+				},
+				"description": "Chamada que retorna o voo com o id especificado na url."
+			},
+			"response": []
+		},
+		{
+			"name": "Deleta voo por id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/voo/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"voo",
+						"1"
+					]
+				},
+				"description": "Chamada que delta voo com id especificado na url."
+			},
+			"response": []
+		},
+		{
+			"name": "Atualiza dados de voo",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"capacidade\": 120,\n    \"companhia\": \"Azul\",\n    \"data\": \"29/05/2015 13:30:00\",\n    \"destino\": \"Kairo\",\n    \"id\": 3,\n    \"id_aeroporto\": 1,\n    \"ocupacao\": 25,\n    \"preco\": 850.0\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/voo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"voo"
+					]
+				},
+				"description": "Chamada que recebe um json com o id de um voo a ser atualizado e os novos dados dele e realiza a mudança dos dados no sistema."
+			},
+			"response": []
+		},
+		{
+			"name": "Retorna aeroportos por companhia",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"companhia\": \"Azul\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/voo/companhia",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"voo",
+						"companhia"
+					]
+				},
+				"description": "Recebe um json com uma companhia, e retorna os aeroportos oferecidos por essa companhia aérea."
+			},
+			"response": []
+		},
+		{
+			"name": "Retorna aeroportos por origem",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"origem\": \"Cuiabá\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/aeroporto/destinos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"aeroporto",
+						"destinos"
+					]
+				},
+				"description": "Chamada que recebe um json com o aeroporto de origem e retorna todos os aeroportos de destino de acordo com aeroporto de origem informado."
+			},
+			"response": []
+		},
+		{
+			"name": "Retorna voos por data",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"data\": \"29/05/2015\", \"companhia\": \"Azul\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/voo/data",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"voo",
+						"data"
+					]
+				},
+				"description": "Chamada que recebe um json com data e companhia e retorna os voos oferecidos pela companhia na data especificada."
+			},
+			"response": []
+		},
+		{
+			"name": "Pesquisa voos",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/voo/passageiros/20",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"voo",
+						"passageiros",
+						"20"
+					]
+				},
+				"description": "Efetua a pesquisa dos voos e retorna todos os voos por ordem de preço crescente para um número de passageiros informados na url."
+			},
+			"response": []
+		},
+		{
+			"name": "Retorna todas as reservas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/reserva",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"reserva"
+					]
+				},
+				"description": "Chamada que retorna todas as reservas efetuadas."
+			},
+			"response": []
+		},
+		{
+			"name": "Retorna reserva por id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/reserva/1",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"reserva",
+						"1"
+					]
+				},
+				"description": "Chamada que retorna reserva especifica por id na url."
+			},
+			"response": []
+		},
+		{
+			"name": "Efetua a reserva",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"id_voo\": 1, \"id_cadastro\": 1}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/reserva",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"reserva"
+					]
+				},
+				"description": "Chamada que recebe um json com o id do voo e do cadastro de algum cliente realiza a reserva e retorna os e-tickets."
+			},
+			"response": []
+		}
+	]
+}
